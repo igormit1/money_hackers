@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Hackers - Inicial</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #E6F0FF;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: blue;
+    color: white;
+    padding: 15px;
+}
+
+.logo {
+    margin-right: 20px;
+}
+
+.logo img {
+    width: 120px;
+    height: auto;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.welcome {
+    font-size: 24px;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.about-button {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.about-button:hover {
+    color: #f1f1f1;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    flex-grow: 1;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.btn {
+    text-decoration: none;
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: rgb(24, 24, 178);
+}
+
+#about-section {
+    padding: 20px;
+    background-color: #ffffffcc; /* Fundo claro com transparência */
+    color: #333;
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 8px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    width: 100%;
+
+    
+}
+</style>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo_money.jpg') }}" alt="Logo da Farmácia">
+        </div>
+        <div class="header-content">
+            <p class="welcome">Bem-vindo ao Money Hackers</p>
+            <p class="subtitle">Encontre conhecimento financeiro aqui.</p>
+        </div>
+        <!-- Botão Sobre -->
+        <button class="about-button" onclick="document.getElementById('about-section').scrollIntoView({ behavior: 'smooth' })">
+            ℹ️ Sobre
+        </button>
+    </header>
+    <main>
+        <div class="button-group">
+            <button onclick="location.href='/register'" class="btn">Registrar</button>
+            <button onclick="location.href='/login'" class="btn">Login</button>
+        </div>
+    </main>
+
+    <!-- Seção Sobre -->
+    <section id="about-section">
+        <h2>Sobre o Money Hackers</h2>
+        <p>A O Money Hackers é um site dedicado a fornecer conhecimento financeiro prático e acessível. Ele oferece conteúdos voltados para a organização financeira pessoal, estratégias de investimentos e soluções inovadoras para otimizar o gerenciamento de dinheiro. Com foco em ensinar como tomar decisões financeiras inteligentes, o site ajuda seus leitores a alcançarem uma vida financeira mais equilibrada e eficiente. Além disso, compartilha dicas, ferramentas e recursos para quem deseja aprimorar sua saúde financeira e explorar novas oportunidades no mercado.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Money Hackers. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
