@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneyHackers - Home</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        /* Estilos gerais */
+        .titulo-recursos {
+            color: white;
+            text-align: center;
+        }
+
+        .btn-sair {
+            background-color: #0d47a1;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-sair:hover {
+            background-color: #08306b;
+        }
+
+        /* Fundo da página inicial */
+        .hero {
+            background: linear-gradient(to right, rgba(41, 128, 185, 0.8), rgba(44, 62, 80, 0.8)), url('https://source.unsplash.com/1600x900/?finance,investment');
+            background-size: cover;
+            padding: 80px 20px;
+        }
+
+        /* Botão 100% largura */
+        .full-width {
+            width: 100%;
+        }
+
+        /* Estilização dos modais */
+        .modal {
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .card-fixed {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            min-height: 320px;
+            margin-bottom: 30px;
+            border-radius: 12px; /* Bordas arredondadas */
+            transition: box-shadow 0.3s ease, transform 0.2s ease;
+        }
+
+        .card-fixed.z-depth-1 {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Sombra suave */
+        }
+
+        .card-fixed:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Sombra mais forte ao passar o mouse */
+            transform: translateY(-4px); /* Leve elevação */
+            cursor: pointer;
+        }
+
+        .card-fixed::before {
+            content: "";
+            display: block;
+            height: 5px;
+            width: 100%;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            background-color: var(--top-color); /* personalizada via inline style */
+        }
+
+        .section {
+            background-color: #f9f9f9; /* ou #f0f4f8 */
+            padding: 40px 0;
+        }
+
+        .recursos-section {
+            background: linear-gradient(135deg, #3f87a6, #153859);
+            padding: 50px 0;
+            color: #080808;
+        }
+
+        .card-fixed {
+            background-color: white; /* Mantém os cards brancos para contraste */
+        }
+
+        .btn-sair {
+            background-color: #1976d2;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 0;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px; /* Altura fixa opcional */
+            min-width: 100px; /* Largura mínima para manter formato */
+            text-align: center;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="blue darken-3">
+        <div class="nav-wrapper container">
+            <a href="#" class="brand-logo">MoneyHackers</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <a href="{{ url_for('home') }}" class="btn red">Sair</a>
+
+
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <!-- Seção de Recursos -->
+    <section class="section recursos-section">
+        <div class="container">
+            <h4 class="titulo-recursos">Recursos</h4>
+            <div class="row">
+
+                <!-- Card 1 -->
+                <div class="col s12 m6 l4">
+                    <div class="card card-fixed z-depth-1 center" style="--top-color: #2196f3;">
+                        <div class="card-content">
+                            <i class="material-icons large blue-text">account_balance</i>
+                            <h5>Aplicações Financeiras</h5>
+                            <p>Conheça as melhores opções de investimentos para seu perfil.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="{{ url_for('aplicacoes_financeiras') }}" class="btn blue">Saiba Mais</a>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="col s12 m6 l4">
+                    <div class="card card-fixed z-depth-1 center" style="--top-color: #4caf50;">
+                        <div class="card-content">
+                            <i class="material-icons large green-text">attach_money</i>
+                            <h5>Simulações Personalizadas</h5>
+                            <p>Simule seus investimentos e descubra a melhor estratégia.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#" class="btn green">Simular</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="col s12 m6 l4">
+                    <div class="card card-fixed z-depth-1 center" style="--top-color: #ff9800;">
+                        <div class="card-content">
+                            <i class="material-icons large orange-text">trending_up</i>
+                            <h5>Dicas Financeiras</h5>
+                            <p>Fique por dentro das melhores práticas para gerir seu dinheiro.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#" class="btn orange">Ver Dicas</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="col s12 m6 l4">
+                    <div class="card card-fixed z-depth-1 center" style="--top-color: #f44336;">
+                        <div class="card-content">
+                            <i class="material-icons large red-text">receipt</i>
+                            <h5>Impostos</h5>
+                            <p>Saiba como calcular e otimizar o pagamento dos seus impostos.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#" class="btn red">Ver Mais</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="col s12 m6 l4">
+                    <div class="card card-fixed z-depth-1 center" style="--top-color: #9c27b0;">
+                        <div class="card-content">
+                            <i class="material-icons large purple-text">assessment</i>
+                            <h5>Controle Financeiro</h5>
+                            <p>Monitore seus gastos e tenha controle total sobre suas finanças.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#" class="btn purple">Gerenciar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="col s12 m6 l4">
+                    <div class="card card-fixed z-depth-1 center" style="--top-color: #e91e63;">
+                        <div class="card-content">
+                            <i class="material-icons large pink-text">person_search</i>
+                            <h5>Perfil de Investidor</h5>
+                            <p>Descubra qual é o seu perfil de investidor e receba recomendações personalizadas.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#" class="btn pink">Descobrir</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="page-footer blue darken-3">
+        <div class="container center">
+            <h5 class="white-text">MoneyHackers</h5>
+            <p class="grey-text text-lighten-4">Transforme sua vida financeira hoje mesmo.</p>
+        </div>
+        <div class="footer-copyright center">
+            <div class="container">© 2025 MoneyHackers - Todos os direitos reservados</div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Logada</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Para garantir que o footer fique na parte inferior */
+        }
+        header {
+            display: flex;
+            justify-content: space-between; /* Espaço entre logo e conteúdo do cabeçalho */
+            align-items: center;
+            background-color: #c0392b; /* Vermelho */
+            color: white;
+            padding: 20px;
+        }
+        .logo {
+            margin-right: 20px; /* Espaço entre a logo e os outros elementos */
+        }
+        .logo img {
+            width: 150px; /* Diminuindo o tamanho da logo */
+            height: auto; /* Mantém a proporção da imagem */
+        }
+        .header-content {
+            display: flex;
+            flex-direction: column; /* Colocando subtítulo e mensagem em coluna */
+        }
+        .welcome {
+            font-size: 24px; /* Tamanho da mensagem de boas-vindas */
+            margin: 0; /* Removendo margem */
+        }
+        .subtitle {
+            font-size: 18px; /* Tamanho do subtítulo */
+            margin: 5px 0; /* Espaço abaixo do subtítulo */
+        }
+        .greeting-container {
+            display: flex;
+            flex-direction: column; /* Coloca a saudação e o botão de logout em coluna */
+            align-items: flex-end; /* Alinha à direita */
+            margin-left: auto; /* Para empurrar para a direita */
+        }
+        .greeting {
+            font-size: 24px; /* Aumentando o tamanho da saudação e do emoji */
+        }
+        .logout-button {
+            margin-top: 5px; /* Espaço acima do botão de logout */
+            background-color: #c0392b; /* Vermelho */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none; /* Remover sublinhado */
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .logout-button:hover {
+            background-color: #a93226; /* Vermelho escuro ao passar o mouse */
+        }
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            flex-grow: 1; /* Para ocupar o espaço restante da tela */
+        }
+        .section {
+            margin-bottom: 30px; /* Espaço entre as seções */
+            width: 100%;
+            max-width: 600px; /* Largura máxima das seções */
+        }
+        .search-container {
+            display: flex;
+            border: 2px solid black; /* Borda preta ao redor da área */
+            border-radius: 5px; /* Bordas arredondadas */
+            overflow: hidden; /* Para não mostrar bordas arredondadas dentro da barra de pesquisa */
+        }
+        .search-input {
+            flex: 1;
+            padding: 10px;
+            border: none; /* Removendo a borda interna */
+            font-size: 16px;
+        }
+        .search-button {
+            padding: 10px;
+            background-color: #007BFF; /* Azul para o botão de pesquisa */
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-buttonred {
+            padding: 10px;
+            background-color: orange; /* Azul para o botão de pesquisa */
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-buttonred:hover {
+    background-color: rgb(188, 121, 38); /* Cor de hover: tom mais escuro de laranja */
+}
+        .search-button:hover {
+            background-color: #0056b3; /* Azul escuro ao passar o mouse */
+        }
+        .add-button {
+            margin-top: 20px; /* Espaço acima do botão de adicionar */
+            background-color: #007BFF; /* Azul */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none; /* Remover sublinhado */
+            font-size: 16px;
+            transition: background-color 0.3s;
+            width: 100%; /* Largura total do botão */
+        }
+        .add-button_orange {
+            margin-top: 20px; /* Espaço acima do botão de adicionar */
+            background-color: orange; /* Azul */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none; /* Remover sublinhado */
+            font-size: 16px;
+            transition: background-color 0.3s;
+            width: 100%; /* Largura total do botão */
+        }
+        .add-button_orange:hover {
+    background-color:  rgb(188, 121, 38); /* Cor de hover: tom mais escuro de laranja */
+        }
+        .add-button:hover {
+            background-color: #0056b3; /* Azul escuro ao passar o mouse */
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            width: 100%;
+        }
+        .title {
+        border-top: 1px solid #1a1919; /* Cor e espessura da linha */
+        padding-top: 8px; /* Espaço entre o texto e a linha */
+        margin-top: 16px; /* Espaço acima do título */
+        }
+
+        .venda-container {
+         border: 1px solid #ccc;
+        padding: 10px;
+        margin: 5px 0;
+        background-color: #f9f9f9;
+}
+
+.venda-medicamento {
+    color: #FFA07A; /* Laranja claro */
+    font-weight: bold; /* Opcional, para destacar mais */
+}
+
+.venda-cliente_azul {
+    color: blue; /* Azul claro */
+    font-weight: bold; /* Opcional: torna o texto mais destacado */
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='Untitled_logo_1_free-file.jpg') }}" alt="Logo da Farmácia">
+        </div>
+        <div class="header-content">
+            <p class="welcome">A saúde é o seu melhor investimento!</p>
+            <p class="subtitle">Descubra os melhores produtos para o seu bem-estar.</p>
+        </div>
+        <div class="greeting-container">
+            <div class="greeting">👤 Olá, {{ usuario }}!</div>
+            <a href="{{ url_for('index') }}" class="logout-button">Logout</a>
+        </div>
+    </header>
+
+    <main>
+        
+        <div class="section">
+            <h2>Adicionar Medicamentos</h2>
+            <a href="{{ url_for('adicionar_medicamentos') }}" class="add-button_orange">Cadastrar Medicamento</a> 
+        </div>
+    
+        <div class="section">
+            <h2>Pesquisar Medicamentos</h2>
+            <div class="search-container">
+                <input type="text" class="search-input" name="letra2" placeholder="Pesquisar medicamento..." id="letra2">
+                <button type="button" class="search-buttonred" id="searchButton2">Pesquisar</button>
+            </div>
+            <div id="resultados2"></div> 
+        </div>
+    
+        <div class="section">
+            <h2 class="title">Adicionar Clientes</h2>
+            <a href="{{ url_for('adicionar_clientes') }}" class="add-button">Cadastrar Cliente</a>
+        </div>
+    
+        <div class="section">
+            <h2>Pesquisar Clientes</h2>
+            <div class="search-container">
+                <input type="text" class="search-input" name="letra" placeholder="Pesquisar cliente..." id="letra">
+                <button type="button" class="search-button" id="searchButton1">Pesquisar</button>
+            </div>
+            <div id="resultados"></div> 
+        </div>
+
+        <div class="section">
+            <h2 class="title" >Adicionar Venda</h2>
+            <a href="{{ url_for('adicionar_venda') }}" class="add-button">Cadastrar Venda</a>
+        </div>
+
+        <div class="section">
+            <h2>Pesquisar venda por cliente</h2>
+            <div class="search-container">
+                <input type="text" class="search-input" name="letra3" placeholder="Pesquisar Venda..." id="letra3">
+                <button type="button" class="search-button" id="searchButton3">Pesquisar </button>
+            </div>
+            <div id="resultados3"></div> 
+        </div>
+
+        <div class="section">
+            <h2>Pesquisar venda por medicamento</h2>
+            <div class="search-container">
+                <input type="text" class="search-input" name="letra4" placeholder="Pesquisar Venda..." id="letra4">
+                <button type="button" class="search-buttonred" id="searchButton4">Pesquisar </button>
+            </div>
+            <div id="resultados4"></div> 
+        </div>
+
+        <script>
+            // Pesquisa cliente
+            document.getElementById('searchButton1').addEventListener('click', function() {
+                const letra = document.getElementById('letra').value;  // Captura o valor do input
+                fetch('/pesquisar_cliente', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ letra: letra })  // Envia o valor em formato JSON
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const resultadosDiv = document.getElementById('resultados');
+                    resultadosDiv.innerHTML = '';  // Limpa resultados anteriores
+                    if (data.resultados.length > 0) {
+                        data.resultados.forEach(cliente => {
+                            const div = document.createElement('div');
+                            div.textContent = cliente.nome;  // Adiciona o nome do cliente
+                            resultadosDiv.appendChild(div);  // Adiciona ao container de resultados
+                        });
+                    } else {
+                        resultadosDiv.textContent = 'Nenhum cliente encontrado.';  // Mensagem caso não encontre
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
+            });
+    
+            // Pesquisa medicamento
+            document.getElementById('searchButton2').addEventListener('click', function() {
+                const letra2 = document.getElementById('letra2').value;  // Captura o valor do input
+                fetch('/pesquisar_medicamento', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ letra2: letra2 })  // Envia o valor em formato JSON
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const resultados2Div = document.getElementById('resultados2');
+                    resultados2Div.innerHTML = '';  // Limpa resultados anteriores
+                    if (data.resultados2.length > 0) {
+                        data.resultados2.forEach(medicamento => {
+                            const div = document.createElement('div');
+                            div.textContent = medicamento.nome_medicamento;  
+                            resultados2Div.appendChild(div);  // Adiciona ao container de resultados
+                        });
+                    } else {
+                        resultados2Div.textContent = 'Nenhum medicamento encontrado.';  // Mensagem caso não encontre
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
+            });
+
+            // Pesquisa venda
+            document.getElementById('searchButton3').addEventListener('click', function () {
+                const letra3 = document.getElementById('letra3').value;  // Captura o valor do input
+                fetch('/pesquisar_venda', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ letra3: letra3 })  // Envia o valor em formato JSON
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const resultados3Div = document.getElementById('resultados3');
+                    resultados3Div.innerHTML = '';  // Limpa resultados anteriores
+
+                    if (data.resultados3.length > 0) {
+                        data.resultados3.forEach(venda => {
+                            const container = document.createElement('div');
+                            container.className = 'venda-container';  // Classe para estilização
+
+                            const nomeClienteDiv = document.createElement('div');
+                            nomeClienteDiv.textContent = `Cliente: ${venda.Nome_Cliente}`;
+                            nomeClienteDiv.className = 'venda-cliente_azul';  // Classe específica para cliente
+                           
+                            const nomeBalconistaDiv = document.createElement('div');
+                            nomeBalconistaDiv.textContent = `Balconista: ${venda.Nome_Balconista}`;
+
+                            const nomeMedicamentoDiv = document.createElement('div');
+                            nomeMedicamentoDiv.textContent = `Medicamento: ${venda.Nome_Medicamento}`;
+
+                            const dataEntregaDiv = document.createElement('div');
+                            dataEntregaDiv.textContent = `Data de Entrega: ${venda.Data_Entrega}`;
+
+                            const qtdMedicamentoDiv = document.createElement('div');
+                            qtdMedicamentoDiv.textContent = `Quantidade: ${venda.qtd_medicamento}`;
+
+                            const loteDiv = document.createElement('div');
+                            loteDiv.textContent = `Lote: ${venda.lote}`;
+
+                            // Adiciona os campos ao container principal
+                            container.appendChild(nomeClienteDiv);
+                            container.appendChild(nomeBalconistaDiv);
+                            container.appendChild(nomeMedicamentoDiv);
+                            container.appendChild(dataEntregaDiv);
+                            container.appendChild(qtdMedicamentoDiv);
+                            container.appendChild(loteDiv);
+
+                            // Adiciona o container estilizado ao div de resultados
+                            resultados3Div.appendChild(container);
+                        });
+                    } else {
+                        resultados3Div.textContent = 'Nenhuma tupla encontrada.';  // Mensagem caso não encontre
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
+        });
+
+
+            // Pesquisa venda medicamento
+           document.getElementById('searchButton4').addEventListener('click', function () {
+                const letra4 = document.getElementById('letra4').value;  // Captura o valor do input
+                fetch('/pesquisar_venda2', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ letra4: letra4 })  // Envia o valor em formato JSON
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const resultados4Div = document.getElementById('resultados4');
+                    resultados4Div.innerHTML = '';  // Limpa resultados anteriores
+
+                    if (data.resultados4.length > 0) {
+                        data.resultados4.forEach(venda => {
+                            const container = document.createElement('div');
+                            container.className = 'venda-container';  // Classe para estilização
+
+                            const nomeClienteDiv = document.createElement('div');
+                            nomeClienteDiv.textContent = `Cliente: ${venda.Nome_Cliente}`;
+                            nomeClienteDiv.className = 'venda-cliente';  // Classe específica para cliente
+
+                            const nomeBalconistaDiv = document.createElement('div');
+                            nomeBalconistaDiv.textContent = `Balconista: ${venda.Nome_Balconista}`;
+
+                            const nomeMedicamentoDiv = document.createElement('div');
+                            nomeMedicamentoDiv.textContent = `Medicamento: ${venda.Nome_Medicamento}`;
+                            nomeMedicamentoDiv.className = 'venda-medicamento'; 
+
+                            const dataEntregaDiv = document.createElement('div');
+                            dataEntregaDiv.textContent = `Data de Entrega: ${venda.Data_Entrega}`;
+
+                            const qtdMedicamentoDiv = document.createElement('div');
+                            qtdMedicamentoDiv.textContent = `Quantidade: ${venda.qtd_medicamento}`;
+
+                            const loteDiv = document.createElement('div');
+                            loteDiv.textContent = `Lote: ${venda.lote}`;
+
+                            // Adiciona os campos ao container principal
+                            container.appendChild(nomeClienteDiv);
+                            container.appendChild(nomeBalconistaDiv);
+                            container.appendChild(nomeMedicamentoDiv);
+                            container.appendChild(dataEntregaDiv);
+                            container.appendChild(qtdMedicamentoDiv);
+                            container.appendChild(loteDiv);
+
+                            // Adiciona o container estilizado ao div de resultados
+                            resultados4Div.appendChild(container);
+                        });
+                    } else {
+                        resultados4Div.textContent = 'Nenhuma tupla encontrada.';  // Mensagem caso não encontre
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
+        });
+        </script>
+    </main>    
+
+    <footer>
+        <p>&copy; 2024 Farmácia Cure+. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
