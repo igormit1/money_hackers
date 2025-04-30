@@ -5,29 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultado do Cadastro</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+            background: #f1f6f9; /* Cor de fundo suave e moderna */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 0;
             text-align: center;
-            padding: 50px;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.5), rgba(240,240,240,1)); /* Gradiente suave */
+        }
+
+        .message-box {
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 40px 50px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .message-box-header {
+            background-color: #1976d2;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            padding: 12px 0;
+            border-radius: 15px;
+            margin-bottom: 25px;
         }
 
         h1 {
             color: #333;
-            font-size: 24px;
+            font-size: 28px;
             margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 30px;
         }
 
         .btn {
             display: inline-block;
             background-color: #4CAF50;
             color: white;
-            padding: 15px 25px;
+            padding: 15px 30px;
             text-align: center;
             text-decoration: none;
             font-size: 16px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
+            border-radius: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
             margin: 10px;
             border: none;
             cursor: pointer;
@@ -35,6 +75,7 @@
 
         .btn:hover {
             background-color: #45a049;
+            transform: translateY(-2px);
         }
 
         .btn-secondary {
@@ -43,16 +84,29 @@
 
         .btn-secondary:hover {
             background-color: #007bb5;
+            transform: translateY(-2px);
         }
 
         a {
             text-decoration: none;
         }
+
+        .btn, .btn-secondary {
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
-    <h1>{{ mensagem }}</h1>
-    <a href="{{ url_for('login') }}" class="btn">Fazer login</a>
-    <a href="{{ url_for('index') }}" class="btn btn-secondary">Voltar à página inicial</a>
+    <div class="message-box">
+        <div class="message-box-header">
+            Resultado do Cadastro
+        </div>
+        <h1>{{ mensagem }}</h1>
+        
+        <a href="{{ url_for('login') }}" class="btn">Fazer login</a>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Voltar à página inicial</a>
+    </div>
 </body>
 </html>
