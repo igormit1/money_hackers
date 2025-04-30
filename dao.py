@@ -10,7 +10,7 @@ def create(nome, usuario, cpf, email, endereco, ocupacao, senha):
         conexao = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='12345678',
+            password='123456',
             database='farmacia',
         )
         cursor = conexao.cursor()
@@ -42,7 +42,7 @@ def authenticate(usuario, password):
         conexao = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='12345678',
+            password='123456',
             database='farmacia',
         )
         cursor = conexao.cursor()
@@ -75,7 +75,7 @@ def create2(nome, cpf, email, endereco):
         conexao = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='12345678',
+            password='123456',
             database='farmacia',
         )
         cursor = conexao.cursor()
@@ -107,7 +107,7 @@ def create3(Nome_medicamento , nome_generico, categoria, distribuidor, data_vali
         conexao = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='12345678',
+            password='123456',
             database='farmacia',
         )
         cursor = conexao.cursor()
@@ -139,7 +139,7 @@ def create4(balconista, cpf_cliente, data_venda, medicamento, qtd, lote):
         conexao = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='12345678',
+            password='123456',
             database='farmacia',
         )
         cursor = conexao.cursor()
@@ -208,7 +208,7 @@ def pesquisa_cliente(letra):
         conexao = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='12345678',
+            password='123456',
             database='farmacia',
         )
         cursor = conexao.cursor()
@@ -247,7 +247,7 @@ def pesquisa_medicamento(letra2):
         conexao = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='12345678',
+            password='123456',
             database='farmacia',
         )
         cursor = conexao.cursor()
@@ -286,7 +286,7 @@ def pesquisa_venda(letra3):
         conexao = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='12345678',
+            password='123456',
             database='farmacia',
         )
         cursor = conexao.cursor()
@@ -335,7 +335,7 @@ def pesquisa_venda2(letra4):
         conexao = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='12345678',
+            password='123456',
             database='farmacia',
         )
         cursor = conexao.cursor()
