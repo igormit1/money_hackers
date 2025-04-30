@@ -164,8 +164,36 @@ def submit():
         return render_template('endcadastro.html', mensagem=mensagem)
 
     except Exception as e:
+    # Verifique se o erro é uma duplicação de entrada
+    
+        if 'usuario' in str(e):
+            mensagem = "O nome de usuário já está em uso. Escolha outro."
+        elif 'CPF' in str(e):
+            mensagem = "O CPF já está cadastrado no sistema."
+        elif 'Email' in str(e):
+            mensagem = "O e-mail já está registrado. Insira um e-mail diferente."
+        else:
+            mensagem = f"Ocorreu um erro inesperado: {str(e)}."
+    
+    # Verifique se o erro é relacionado ao número de caracteres excedente
+    
+        if 'usuario' in str(e):
+            mensagem = "O nome de usuário excedeu o número máximo de caracteres. Por favor, insira um nome de usuário mais curto."
+        elif 'CPF' in str(e):
+            mensagem = "O CPF fornecido é inválido ou excedeu o limite de caracteres."
+        elif 'Email' in str(e):
+            mensagem = "O e-mail fornecido excede o número máximo de caracteres permitido. Tente um e-mail mais curto."
+        else:
+            mensagem = f"Ocorreu um erro de tamanho de dados: {str(e)}."
+    
+    else:
+        # Caso não seja erro de duplicidade ou de tamanho, exibe a mensagem genérica
         mensagem = f"Ocorreu um erro: {str(e)}."
-        return render_template('endcadastro.html', mensagem=mensagem)
+    
+    # Retorna a página com a mensagem de erro
+    return render_template('endcadastro.html', mensagem=mensagem)
+
+    
     
 #--------------------------------------------------------------------------------------------------------------------
 #registro cliente
