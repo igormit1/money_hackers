@@ -178,9 +178,9 @@ def submit():
     # Verifique se o erro é relacionado ao número de caracteres excedente
     
         if 'usuario' in str(e):
-            mensagem = "O nome de usuário excedeu o número máximo de caracteres. Por favor, insira um nome de usuário mais curto."
+            mensagem = "O nome de usuário já existe. Por favor, escolha outro!"
         elif 'CPF' in str(e):
-            mensagem = "O CPF fornecido é inválido ou excedeu o limite de caracteres."
+            mensagem = "O CPF fornecido é inválido, já existe ou excedeu o limite de caracteres. Por favor, insira outro!"
         elif 'Email' in str(e):
             mensagem = "O e-mail fornecido excede o número máximo de caracteres permitido. Tente um e-mail mais curto."
         else:
