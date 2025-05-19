@@ -180,7 +180,7 @@ def submit():
         if 'usuario' in str(e):
             mensagem = "O nome de usuário já existe. Por favor, escolha outro!"
         elif 'CPF' in str(e):
-            mensagem = "O CPF fornecido é inválido, já existe ou excedeu o limite de caracteres. Por favor, insira outro!"
+            mensagem = "O CPF fornecido é inválido, já existe ou excedeu o limite de caracteres."
         elif 'Email' in str(e):
             mensagem = "O e-mail fornecido excede o número máximo de caracteres permitido. Tente um e-mail mais curto."
         else:
@@ -294,6 +294,10 @@ def home():  # Mudamos o nome de 'index' para 'home'
     return render_template('index.html')
 
 #pesquisar venda
+
+@app.route('/perfil-investidor')
+def perfil_investidor():
+    return render_template('perfil_investidor.html') 
 
 @app.route('/pesquisar_venda', methods=['POST'])
 def pesquisar_venda():
