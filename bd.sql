@@ -1,8 +1,6 @@
 CREATE DATABASE farmacia;
 USE farmacia;
 
-
-
 CREATE TABLE if not exists Pessoa (
     ID_Pessoa INT AUTO_INCREMENT PRIMARY KEY,
     Nome VARCHAR(100) NOT NULL,
@@ -14,10 +12,15 @@ CREATE TABLE if not exists Pessoa (
     Senha CHAR(64) NOT NULL
 );
 
-
-
-
 select * from pessoa;
 
 INSERT INTO pessoa (Nome, CPF, email, Endereco, Ocupacao, Senha)
     VALUES ('bbbba', '222233', 'bbbbeeeeee@ee', 'bbbbendere', 'ocubbbpacao1', 'sbbbenha1');
+
+-- Tabela adicionada abaixo
+CREATE TABLE IF NOT EXISTS perfil_investidor (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pontuacao INT,
+    perfil VARCHAR(20),
+    descricao TEXT
+);
