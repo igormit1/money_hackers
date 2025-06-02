@@ -262,6 +262,76 @@
     });
 
     renderQuestion(currentQuestion);
+
+   function mostrarResultado() {
+  const total = respostas.reduce((a, b) => a + b, 0);
+  let perfil = "", descricao = "", cor = "";
+
+  if (total <= 22) {
+    perfil = "Conservador";
+    cor = "#2563eb";
+    descricao = `Você prioriza segurança e estabilidade, evitando grandes riscos. Prefere investimentos mais seguros, como renda fixa e títulos públicos.`;
+  } else if (total <= 38) {
+    perfil = "Moderado";
+    cor = "#f59e0b";
+    descricao = `Você busca equilíbrio entre risco e retorno, aceitando alguma volatilidade para obter melhores ganhos.`;
+  } else {
+    perfil = "Arrojado";
+    cor = "#dc2626";
+    descricao = `Você está confortável com altos riscos e busca retorno acima da média, aceitando oscilações no curto prazo.`;
+  }
+
+  const resultadoDiv = document.getElementById("resultado");
+  resultadoDiv.classList.remove("hidden");
+
+  document.getElementById("perfil-texto").innerHTML = `
+    <strong class="text-blue-800">${perfil}</strong> (${total} pontos)<br><br>${descricao}
+  `;
+
+  const ctx = document.getElementById("graficoPerfil").getContext("2d");
+  new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: ["Seu perfil", "Até 50 pts"],
+      datasets: [{
+        label: perfil,
+        data: [total, 50 - total],
+        backgroundColor: [cor, "#e5e7eb"]
+      }]
+    },
+    options: {
+      plugins: {
+        legend: { display: false },
+        tooltip: { enabled: false }
+      },
+      cutout: "80%"
+    }
+  });
+
+  // Enviar os dados para o backend após mostrar o resultado
+  fetch('/salvar_perfil', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      pontuacao: total,
+      perfil: perfil,
+      descricao: descricao
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Resposta do servidor:', data);
+    if(data.status !== 'success') {
+      alert('Erro ao salvar perfil: ' + data.message);
+    }
+  })
+  .catch(error => {
+    console.error('Erro na requisição:', error);
+    alert('Erro ao salvar perfil.');
+  });
+}
+
+
   </script>
 
 </body>
