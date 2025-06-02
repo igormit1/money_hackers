@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulador de Impostos e Tributos</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #a8edea, #fed6e3);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 30px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .result {
+      font-weight: bold;
+      color: green;
+      text-align: center;
+    }
+
+    .info {
+      background-color: #e7f3fe;
+      border-left: 5px solid #2196F3;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .section-title {
+      margin-top: 40px;
+      font-size: 20px;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Central de Cálculos Tributários</h1>
+
+    <label for="salario">Informe seu salário mensal (R$):</label>
+    <input type="number" id="salario" placeholder="Ex: 5000" />
+
+    <div class="button-group">
+      <button onclick="mostrarTodasInformacoes()">Mostrar Informações</button>
+    </div>
+
+    <p class="result" id="resultado"></p>
+
+    <div class="info" id="dicasInfo" style="display:none;"></div>
+    <div class="info" id="tabelaIR" style="display:none;"></div>
+  </div>
+
+  <div class="container">
+    <h2>Tipos de Empresa e Tributação</h2>
+
+    <label for="tipoEmpresa">Selecione o tipo de empresa:</label>
+    <select id="tipoEmpresa" onchange="mostrarInfoEmpresa()">
+      <option value="">-- Escolha uma opção --</option>
+      <option value="mei">MEI (Microempreendedor Individual)</option>
+      <option value="me">ME (Microempresa)</option>
+      <option value="ltda">LTDA (Empresa Limitada)</option>
+    </select>
+
+    <div class="info" id="infoEmpresa" style="display:none;"></div>
+  </div>
+
+  <script>
+    function mostrarTodasInformacoes() {
+      const salario = parseFloat(document.getElementById("salario").value);
+      const resultado = document.getElementById("resultado");
+      const tabela = document.getElementById("tabelaIR");
+      const dicas = document.getElementById("dicasInfo");
+
+      if (isNaN(salario) || salario <= 0) {
+        resultado.innerText = "Por favor, insira um salário válido.";
+        resultado.style.color = "red";
+        return;
+      }
+
+      let imposto = 0;
+      if (salario <= 2259.20) {
+        imposto = 0;
+      } else if (salario <= 2826.65) {
+        imposto = (salario * 0.075) - 169.44;
+      } else if (salario <= 3751.05) {
+        imposto = (salario * 0.15) - 381.44;
+      } else if (salario <= 4664.68) {
+        imposto = (salario * 0.225) - 662.77;
+      } else {
+        imposto = (salario * 0.275) - 896.00;
+      }
+      imposto = Math.max(imposto, 0);
+
+      let inss = 0;
+      if (salario <= 1412.00) {
+        inss = salario * 0.075;
+      } else if (salario <= 2666.68) {
+        inss = salario * 0.09 - 21.18;
+      } else if (salario <= 4000.03) {
+        inss = salario * 0.12 - 101.18;
+      } else if (salario <= 7786.02) {
+        inss = salario * 0.14 - 181.18;
+      } else {
+        inss = 908.86;
+      }
+
+      const salarioBaseIR = salario - inss;
+      let irFinal = 0;
+      if (salarioBaseIR <= 2259.20) {
+        irFinal = 0;
+      } else if (salarioBaseIR <= 2826.65) {
+        irFinal = (salarioBaseIR * 0.075) - 169.44;
+      } else if (salarioBaseIR <= 3751.05) {
+        irFinal = (salarioBaseIR * 0.15) - 381.44;
+      } else if (salarioBaseIR <= 4664.68) {
+        irFinal = (salarioBaseIR * 0.225) - 662.77;
+      } else {
+        irFinal = (salarioBaseIR * 0.275) - 896.00;
+      }
+
+      const salarioLiquido = salario - inss - Math.max(irFinal, 0);
+
+      resultado.innerHTML = `
+        Imposto de Renda: R$ ${imposto.toFixed(2)}<br>
+        Contribuição INSS: R$ ${inss.toFixed(2)}<br>
+        Salário Líquido: R$ ${salarioLiquido.toFixed(2)}
+      `;
+      resultado.style.color = "green";
+
+      tabela.innerHTML = `
+        <strong>Tabela IRPF 2024:</strong><br>
+        • Até R$ 2.259,20: isento<br>
+        • De R$ 2.259,21 até R$ 2.826,65: 7,5% (-R$169,44)<br>
+        • De R$ 2.826,66 até R$ 3.751,05: 15% (-R$381,44)<br>
+        • De R$ 3.751,06 até R$ 4.664,68: 22,5% (-R$662,77)<br>
+        • Acima de R$ 4.664,68: 27,5% (-R$896,00)
+      `;
+      tabela.style.display = "block";
+
+      dicas.innerHTML = `
+        <strong>Dicas de Planejamento Tributário:</strong>
+        <ul>
+          <li>Declare todas as despesas dedutíveis (educação, saúde, previdência privada).</li>
+          <li>Considere a declaração completa se tiver muitos gastos dedutíveis.</li>
+          <li>Guarde comprovantes por pelo menos 5 anos.</li>
+          <li>Evite erros com dependentes ou CPF de cônjuge repetido.</li>
+          <li>Contribuições à previdência privada (PGBL) podem reduzir o IR.</li>
+        </ul>
+      `;
+      dicas.style.display = "block";
+    }
+
+    function mostrarInfoEmpresa() {
+      const tipo = document.getElementById("tipoEmpresa").value;
+      const info = document.getElementById("infoEmpresa");
+      let conteudo = "";
+
+      if (tipo === "mei") {
+        conteudo = `
+          <strong>MEI - Microempreendedor Individual</strong><br>
+          • Faturamento anual: até R$ 81.000<br>
+          • Tributos fixos mensais (Simples Nacional)<br>
+          • Pode ter 1 funcionário<br>
+          • Não exige contador (na maioria dos casos)
+        `;
+      } else if (tipo === "me") {
+        conteudo = `
+          <strong>ME - Microempresa</strong><br>
+          • Faturamento anual: até R$ 360.000<br>
+          • Pode optar pelo Simples Nacional<br>
+          • Exige contador<br>
+          • Pode ter mais de um sócio
+        `;
+      } else if (tipo === "ltda") {
+        conteudo = `
+          <strong>LTDA - Sociedade Limitada</strong><br>
+          • Sem limite fixo, mas com obrigações proporcionais ao faturamento<br>
+          • Pode ser ME ou EPP, conforme receita<br>
+          • Pode optar pelo Simples, Lucro Presumido ou Lucro Real<br>
+          • Mais flexível e adequada para crescimento empresarial
+        `;
+      } else {
+        info.style.display = "none";
+        return;
+      }
+
+      info.innerHTML = conteudo;
+      info.style.display = "block";
+    }
+  </script>
+
+</body>
+</html>

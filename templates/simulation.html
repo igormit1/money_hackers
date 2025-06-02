@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulador Financeiro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d48a1;
+      padding: 20px;
+      color: #333;
+    }
+
+    h1, h2 {
+      color: #7ab1e7;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .simulacao {
+      background-color: white;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 15px;
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1558b0;
+    }
+
+    .resultado {
+      margin-top: 15px;
+      background: #e7f3ff;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Simulador Financeiro</h1>
+
+    <!-- Juros Compostos -->
+    <div class="simulacao">
+      <h2>Simulação de Juros Compostos</h2>
+      <label>Capital Inicial (R$):</label>
+      <input type="number" id="capitalInicial" value="1000">
+
+      <label>Taxa de Juros (% ao mês):</label>
+      <input type="number" id="taxaJuros" value="1">
+
+      <label>Tempo (meses):</label>
+      <input type="number" id="tempo" value="12">
+
+      <button onclick="simularJuros()">Simular</button>
+      <div class="resultado" id="resultadoJuros"></div>
+    </div>
+
+    <!-- Previsão de saldo futuro com aportes mensais -->
+    <div class="simulacao">
+      <h2>Previsão de Saldo Futuro</h2>
+      <label>Depósito Mensal (R$):</label>
+      <input type="number" id="aporte" value="200">
+
+      <label>Taxa de Juros (% ao mês):</label>
+      <input type="number" id="taxaPrevisao" value="0.8">
+
+      <label>Meses:</label>
+      <input type="number" id="mesesPrevisao" value="24">
+
+      <button onclick="preverSaldo()">Prever</button>
+      <div class="resultado" id="resultadoPrevisao"></div>
+    </div>
+
+    <!-- Simulação de Financiamento (PRICE) -->
+    <div class="simulacao">
+      <h2>Simulação de Financiamento (Tabela PRICE)</h2>
+      <label>Valor Financiado (R$):</label>
+      <input type="number" id="valorFinanciado" value="20000">
+
+      <label>Taxa de Juros (% ao mês):</label>
+      <input type="number" id="taxaFinanciamento" value="1.5">
+
+      <label>Prazo (meses):</label>
+      <input type="number" id="prazoFinanciamento" value="36">
+
+      <button onclick="simularFinanciamento()">Simular</button>
+      <div class="resultado" id="resultadoFinanciamento"></div>
+    </div>
+  </div>
+
+  <script>
+    function simularJuros() {
+      const P = parseFloat(document.getElementById('capitalInicial').value);
+      const i = parseFloat(document.getElementById('taxaJuros').value) / 100;
+      const t = parseInt(document.getElementById('tempo').value);
+
+      const montante = P * Math.pow(1 + i, t);
+      document.getElementById('resultadoJuros').innerHTML =
+        `Montante após ${t} meses: <strong>R$ ${montante.toFixed(2)}</strong>`;
+    }
+
+    function preverSaldo() {
+      const aporte = parseFloat(document.getElementById('aporte').value);
+      const taxa = parseFloat(document.getElementById('taxaPrevisao').value) / 100;
+      const meses = parseInt(document.getElementById('mesesPrevisao').value);
+
+      let saldo = 0;
+      for (let i = 0; i < meses; i++) {
+        saldo = (saldo + aporte) * (1 + taxa);
+      }
+
+      document.getElementById('resultadoPrevisao').innerHTML =
+        `Saldo futuro estimado após ${meses} meses: <strong>R$ ${saldo.toFixed(2)}</strong>`;
+    }
+
+    function simularFinanciamento() {
+      const valor = parseFloat(document.getElementById('valorFinanciado').value);
+      const taxa = parseFloat(document.getElementById('taxaFinanciamento').value) / 100;
+      const n = parseInt(document.getElementById('prazoFinanciamento').value);
+
+      const parcela = valor * (taxa / (1 - Math.pow(1 + taxa, -n)));
+      const totalPago = parcela * n;
+      const jurosTotal = totalPago - valor;
+
+      document.getElementById('resultadoFinanciamento').innerHTML = `
+        <p>Valor da parcela: <strong>R$ ${parcela.toFixed(2)}</strong></p>
+        <p>Total pago: <strong>R$ ${totalPago.toFixed(2)}</strong></p>
+        <p>Total de juros: <strong>R$ ${jurosTotal.toFixed(2)}</strong></p>
+      `;
+    }
+  </script>
+</body>
+</html>
