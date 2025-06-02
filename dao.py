@@ -10,7 +10,7 @@ def create(nome, usuario, cpf, email, endereco, ocupacao, senha):
         conexao = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='123456',
+            password='12345678',
             database='farmacia',
         )
         cursor = conexao.cursor()
@@ -42,7 +42,7 @@ def authenticate(usuario, password):
         conexao = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='123456',
+            password='12345678',
             database='farmacia',
         )
         cursor = conexao.cursor()
@@ -75,7 +75,7 @@ def create2(nome, cpf, email, endereco):
         conexao = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='123456',
+            password='12345678',
             database='farmacia',
         )
         cursor = conexao.cursor()
@@ -107,7 +107,7 @@ def create3(Nome_medicamento , nome_generico, categoria, distribuidor, data_vali
         conexao = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='123456',
+            password='12345678',
             database='farmacia',
         )
         cursor = conexao.cursor()
@@ -139,7 +139,7 @@ def create4(balconista, cpf_cliente, data_venda, medicamento, qtd, lote):
         conexao = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='123456',
+            password='12345678',
             database='farmacia',
         )
         cursor = conexao.cursor()
@@ -208,7 +208,7 @@ def pesquisa_cliente(letra):
         conexao = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='123456',
+            password='12345678',
             database='farmacia',
         )
         cursor = conexao.cursor()
@@ -238,7 +238,25 @@ def pesquisa_cliente(letra):
             cursor.close()
         if 'conexao' in locals() and conexao:
             conexao.close()
-
+def salvar_perfil_investidor(pontuacao, perfil, descricao):
+    try:
+        conexao = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='12345678',
+            database='farmacia',
+        )
+        cursor = conexao.cursor()
+        sql = "INSERT INTO perfil_investidor (pontuacao, perfil, descricao) VALUES (%s, %s, %s)"
+        valores = (pontuacao, perfil, descricao)
+        cursor.execute(sql, valores)
+        conexao.commit()
+        cursor.close()
+        conexao.close()
+        return True
+    except Exception as e:
+        print("Erro ao salvar perfil:", e)
+        return False
 #-----------------------------------------------------------------------------------------------------------
 
 def pesquisa_medicamento(letra2):
@@ -247,7 +265,7 @@ def pesquisa_medicamento(letra2):
         conexao = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='123456',
+            password='12345678',
             database='farmacia',
         )
         cursor = conexao.cursor()
@@ -286,7 +304,7 @@ def pesquisa_venda(letra3):
         conexao = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='123456',
+            password='12345678',
             database='farmacia',
         )
         cursor = conexao.cursor()
@@ -335,7 +353,7 @@ def pesquisa_venda2(letra4):
         conexao = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='123456',
+            password='12345678',
             database='farmacia',
         )
         cursor = conexao.cursor()
@@ -492,3 +510,5 @@ def recomenda2():
             cursor.close()
         if conexao:
             conexao.close()
+
+        
