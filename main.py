@@ -1,6 +1,8 @@
 from flask import Flask, request, render_template, jsonify
 from dao import create, create2, create3, create4, pesquisa_cliente, pesquisa_medicamento, pesquisa_venda, pesquisa_venda2, recomenda, recomenda1, recomenda2
 from dao import authenticate
+from dao import salvar_perfil_investidor
+
 
 app = Flask(__name__)
 
@@ -298,6 +300,28 @@ def home():  # Mudamos o nome de 'index' para 'home'
 @app.route('/perfil-investidor')
 def perfil_investidor():
     return render_template('perfil_investidor.html') 
+@app.route('/salvar_perfil', methods=['POST'])
+def salvar_perfil():
+    data = request.get_json()
+    print("Recebido:", data)
+
+    pontuacao = data.get('pontuacao')
+    perfil = data.get('perfil')
+    descricao = data.get('descricao')
+
+    sucesso = salvar_perfil_investidor(pontuacao, perfil, descricao)
+
+    if sucesso:
+        return jsonify({'status': 'success', 'message': 'Perfil salvo com sucesso!'})
+    else:
+        return jsonify({'status': 'error', 'message': 'Erro ao salvar perfil.'})
+@app.route('/simulacao')
+def simulacao():
+    return render_template('simulation.html') 
+
+@app.route('/imposto')
+def imposto():
+    return render_template('imposto.html') 
 
 @app.route('/pesquisar_venda', methods=['POST'])
 def pesquisar_venda():
